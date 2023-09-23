@@ -6,6 +6,8 @@
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 /Packages
+/.vscode
+/.vs
 
 Recordings
 
@@ -39,3 +41,4 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+.vsconfig
