@@ -26,7 +26,7 @@ public class Controller2D : MonoBehaviour
         CalculateRaySpacing();
     }
 
-    public void Move(Vector3 moveDistance)
+    public void Move(Vector2 moveDistance)
     {
         UpdateRaycastOrigins();
         collisions.Reset();
@@ -44,7 +44,7 @@ public class Controller2D : MonoBehaviour
     }
 
     // Changes in this method effect moveDistance Move method
-    void HorizontalCollisions(ref Vector3 moveDistance)
+    void HorizontalCollisions(ref Vector2 moveDistance)
     {
         float directionX = Mathf.Sign(moveDistance.x);
         float rayLength = Mathf.Abs(moveDistance.x) + skinWidth;
@@ -80,7 +80,7 @@ public class Controller2D : MonoBehaviour
 
 
     // Changes in this method effect moveDistance inside Move method
-    void VerticalCollisions(ref Vector3 moveDistance)
+    void VerticalCollisions(ref Vector2 moveDistance)
     {
         float directionY = Mathf.Sign(moveDistance.y);
         float rayLength = Mathf.Abs(moveDistance.y) + skinWidth;

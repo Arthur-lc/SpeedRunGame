@@ -240,10 +240,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  accelerationTimeGrounded: 0.1
   maxJumpHeight: 4
   timeToJumpApex: 0.8
   accelerationTimeAirborne: 0.2
-  accelerationTimeGrounded: 0.1
+  dashForce: 15
+  dashTime: 0.05
+  dashCoolDown: 0.5
 --- !u!61 &470389493
 BoxCollider2D:
   m_ObjectHideFlags: 0

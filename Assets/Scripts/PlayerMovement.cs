@@ -5,14 +5,21 @@ using UnityEngine;
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour
 {
-    // Inspector Variables
     [SerializeField] private float moveSpeed = 6f; // 6f
-    // Assign values to these to determine gravity and jumpVelocity
+    [SerializeField] private float accelerationTimeGrounded = 0.1f; // 0.1f
+
+    [Header("Jump")]
     [SerializeField] private float maxJumpHeight = 4f; // 4f
     [SerializeField] private float timeToJumpApex = 0.4f; // 0.4f
-    // X Velocity Smoothing Variables
     [SerializeField] private float accelerationTimeAirborne = 0.2f; // 0.2f
-    [SerializeField] private float accelerationTimeGrounded = 0.1f; // 0.1f
+    
+    [Header("Dash")]
+    [SerializeField] private float dashForce;
+    [SerializeField] private float dashTime;
+    [SerializeField] private float dashCoolDown = 1f;
+    private float timeSinceDash = 0f;
+    private bool isDashing;
+
 
     // Start Variables
     Controller2D controller;
@@ -29,12 +36,15 @@ public class Player : MonoBehaviour
     private bool reachedApex = true;
     private float maxHeightReached = Mathf.NegativeInfinity;
     private float startHeight = Mathf.NegativeInfinity;
+    
+    private Vector2 mouseDir;
+    private bool gravityEnabled = true;
 
     // Update Variables
     private float jumpTimer = 0;
     private bool JumpButton = false;
-    Vector3 velocity;
-    Vector3 prevVelocity;
+    Vector2 velocity;
+    Vector2 prevVelocity;
 
     void Start()
     {
@@ -60,6 +70,14 @@ public class Player : MonoBehaviour
             Jump();
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && timeSinceDash > dashCoolDown) // Dash
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouseDir = (mousePos - (Vector2)transform.position).normalized;
+            timeSinceDash = 0;
+            isDashing = true;
+        }
+
         if (!reachedApex && maxHeightReached > transform.position.y)
         {
             reachedApex = true;
@@ -81,12 +99,21 @@ public class Player : MonoBehaviour
 
         prevVelocity = velocity;
 
+        timeSinceDash += Time.fixedDeltaTime;
+        if (isDashing)
+            Dash();
+
         velocity.x = Mathf.SmoothDamp(
             velocity.x,
             targetVelocityX,
             ref velocityXSmoothing,
             (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-        velocity.y += gravity * Time.fixedDeltaTime;
+
+        if (gravityEnabled)
+        {
+            velocity.y += gravity * Time.fixedDeltaTime;
+        }
+ 
         Vector3 deltaPosition = (prevVelocity + velocity) * 0.5f * Time.fixedDeltaTime;
         controller.Move(deltaPosition);
 
@@ -113,5 +140,23 @@ public class Player : MonoBehaviour
         reachedApex = false;
         maxHeightReached = Mathf.NegativeInfinity;
         startHeight = transform.position.y;
+    }
+
+    private void Dash()
+    {
+        gravityEnabled = false;
+        if (timeSinceDash > dashTime)
+        {
+            isDashing = false;
+            gravityEnabled = true;
+            return;
+        }
+    
+        Vector2 dashDir = mouseDir;
+        if (mouseDir.y > 0)
+        {
+            dashDir = new Vector2(mouseDir.x , 0).normalized;
+        }
+        velocity += dashDir * dashForce;
     }
 }
