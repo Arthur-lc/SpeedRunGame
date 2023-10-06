@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsOnFLoor => collisionDown && velocity.y <= 0; // esta no chao se colidindo com o chao e nao esta subindo
     private bool wasOnAir; // estava no ar no ultimo frame
     public bool isLanding => IsOnFLoor && wasOnAir; // estava no ar e tocou o chao NESTE frame
+    public bool isLanding => IsOnFLoor && wasOnAir; // estava no ar e tocou o chao NESTE frame
 
     private Vector3 upperCollisionBound;
     public bool IsOnCealing => collisionUp && velocity.y >= 0;
