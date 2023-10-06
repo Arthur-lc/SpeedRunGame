@@ -826,7 +826,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1630850782234121055, guid: 9e2e82714a3f1274bba8dc72e6029b22, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.94
+      value: -2.881
       objectReference: {fileID: 0}
     - target: {fileID: 1630850782234121055, guid: 9e2e82714a3f1274bba8dc72e6029b22, type: 3}
       propertyPath: m_LocalPosition.y
@@ -887,6 +887,26 @@ PrefabInstance:
     - target: {fileID: 3987628021732582752, guid: 9e2e82714a3f1274bba8dc72e6029b22, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972368399422716206, guid: 9e2e82714a3f1274bba8dc72e6029b22, type: 3}
+      propertyPath: gunDashDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972368399422716206, guid: 9e2e82714a3f1274bba8dc72e6029b22, type: 3}
+      propertyPath: gunDashDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972368399422716206, guid: 9e2e82714a3f1274bba8dc72e6029b22, type: 3}
+      propertyPath: keyboardInfluence
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972368399422716206, guid: 9e2e82714a3f1274bba8dc72e6029b22, type: 3}
+      propertyPath: swordDashDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972368399422716206, guid: 9e2e82714a3f1274bba8dc72e6029b22, type: 3}
+      propertyPath: swordDashDuration
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
