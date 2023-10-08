@@ -9,7 +9,7 @@ using UnityEngine.Rendering.Universal;
 public class PlayerMovement : MonoBehaviour
 {
     public float HorizontalDir { get; private set;}
-    private Vector2 velocity;
+    private Vector2 velocity = Vector2.zero;
 
     
     [SerializeField] private float speed = 10f;
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 lowerCollisionBound;
     public bool IsOnFLoor => collisionDown && velocity.y <= 0; // esta no chao se colidindo com o chao e nao esta subindo
     private bool wasOnAir; // estava no ar no ultimo frame
-    public bool isLanding => IsOnFLoor && wasOnAir; // estava no ar e tocou o chao NESTE frame
+    public bool IsLanding => IsOnFLoor && wasOnAir; // estava no ar e tocou o chao NESTE frame
 
     private Vector3 upperCollisionBound;
     public bool IsOnCealing => collisionUp && velocity.y >= 0;
@@ -110,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateDash() { // chamar no fixedUpdate
         timeSinceDash += Time.fixedDeltaTime;
         velocity = dashDir * DashSpeed;
-        if(timeSinceDash >= dashDuration || isLanding) {
+        if(timeSinceDash >= dashDuration || IsLanding) {
             isDashing = false;
             isGravityEnabled = true;
             gravity = 0f;

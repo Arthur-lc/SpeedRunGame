@@ -226,19 +226,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45fb66b0f7dd01478ea0051ab59e960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
+  speed: 10
   jumpForce: 20
   airControl: 0.1
   Gravity: 8.9
-  dashDistance: 10
-  dashDuration: 0.5
+  dashDistance: 5
+  dashDuration: 0.1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  groundCheckTransform: {fileID: 6575780914443490676}
-  groundDitstance: 0.1
-  cealingCheckTransform: {fileID: 635414891434393423}
-  cealingDitstance: 0.1
 --- !u!114 &8972368399422716206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,3 +247,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ca84b2bd56ca6469b5898e3b3e78b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  swordDamage: 5
+  swordDashDistance: 5
+  swordDashDuration: 0.1
+  gunDashDistance: 3
+  gunDashDuration: 0.1
+  keyboardInfluence: 1.5
