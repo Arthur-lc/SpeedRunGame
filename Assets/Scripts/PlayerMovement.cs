@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -10,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float HorizontalDir { get; private set;}
     private Vector2 velocity;
-
+    private Animator anim;
     
     [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpForce = 10f;
@@ -46,12 +47,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start() {
         coll = GetComponent<Collider2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update() {
         HorizontalDir = 0;
         HorizontalDir = Input.GetAxisRaw("Horizontal");
+        bool run = Math.Abs(HorizontalDir) > 0.001;
+        if(HorizontalDir > 0){
+            transform.eulerAngles = new Vector3(0f,0f,0f);
+        }
+        else if(HorizontalDir < 0){
+            transform.eulerAngles = new Vector3(0f,180f,0f);
+        }
+        anim.SetBool("run",run);
 
+        HorizontalDir = Math.Abs(HorizontalDir);
+
+        if(wasOnAir)
+            anim.SetBool("jump",true);
+        if(IsOnFLoor)
+            anim.SetBool("jump",false);
         // Pulo
         if (Input.GetKeyDown(KeyCode.Space)) {
             velocity.y = jumpForce;
@@ -86,7 +102,6 @@ public class PlayerMovement : MonoBehaviour
         }
         
         transform.Translate(velocity * Time.fixedDeltaTime);
-
     }
 
     /// <summary>
