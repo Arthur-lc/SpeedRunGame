@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         if(IsOnFLoor)
             anim.SetBool("jump",false);
         // Pulo
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space)&&!wasOnAir) {
             velocity.y = jumpForce;
             gravity = 0;
         }
