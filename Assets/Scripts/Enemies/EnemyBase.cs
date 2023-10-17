@@ -2,8 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Direction
+{
+    right = 1,
+    left = -1
+}
+
 public class EnemyBase : MonoBehaviour
 {
+    [SerializeField] protected Direction FacingDirection;
+
     [Header("edge/wall detection")]
     [SerializeField] private float detectionRange;
     [SerializeField] private float detectionRadius = 0.1f;

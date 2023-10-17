@@ -18,8 +18,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float Gravity = 10f;
 
     [Header("Dash")]
-    [SerializeField] private float dashDistance = 10f;
-    [SerializeField] private float dashDuration = 0.5f;
+    [SerializeField] private TrailRenderer trail;
+    private float dashDistance;
+    private float dashDuration;
     private bool isDashing = false;
     private float timeSinceDash = 0;
     private Vector2 dashDir;
@@ -105,18 +106,21 @@ public class PlayerMovement : MonoBehaviour
 
         isDashing = true;
         timeSinceDash = 0;
+
+        trail.emitting = true;
     }
 
     private void UpdateDash() { // chamar no fixedUpdate
         timeSinceDash += Time.fixedDeltaTime;
         velocity = dashDir * DashSpeed;
-        if(timeSinceDash >= dashDuration || IsLanding) {
+
+        if(timeSinceDash >= dashDuration || IsLanding) { // end
             isDashing = false;
             isGravityEnabled = true;
             gravity = 0f;
             velocity.x = Mathf.Clamp(velocity.x, -speed, speed);
             velocity.y = Mathf.Clamp(velocity.y, -speed, speed);
-
+            trail.emitting = false;
         }
     }
 
