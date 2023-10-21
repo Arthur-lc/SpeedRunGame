@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -10,8 +9,8 @@ using UnityEngine.Rendering.Universal;
 public class PlayerMovement : MonoBehaviour
 {
     public float HorizontalDir { get; private set;}
-    private Vector2 velocity;
-    private Animator anim;
+    private Vector2 velocity = Vector2.zero;
+
     
     [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpForce = 10f;
@@ -19,8 +18,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float Gravity = 10f;
 
     [Header("Dash")]
-    [SerializeField] private float dashDistance = 10f;
-    [SerializeField] private float dashDuration = 0.5f;
+    [SerializeField] private TrailRenderer trail;
+    private float dashDistance;
+    private float dashDuration;
     private bool isDashing = false;
     private float timeSinceDash = 0;
     private Vector2 dashDir;
@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 lowerCollisionBound;
     public bool IsOnFLoor => collisionDown && velocity.y <= 0; // esta no chao se colidindo com o chao e nao esta subindo
     private bool wasOnAir; // estava no ar no ultimo frame
-    public bool isLanding => IsOnFLoor && wasOnAir; // estava no ar e tocou o chao NESTE frame
+    public bool IsLanding => IsOnFLoor && wasOnAir; // estava no ar e tocou o chao NESTE frame
 
     private Vector3 upperCollisionBound;
     public bool IsOnCealing => collisionUp && velocity.y >= 0;
@@ -47,29 +47,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start() {
         coll = GetComponent<Collider2D>();
-        anim = GetComponent<Animator>();
     }
 
     private void Update() {
         HorizontalDir = 0;
         HorizontalDir = Input.GetAxisRaw("Horizontal");
-        bool run = Math.Abs(HorizontalDir) > 0.001;
-        if(HorizontalDir > 0){
-            transform.eulerAngles = new Vector3(0f,0f,0f);
-        }
-        else if(HorizontalDir < 0){
-            transform.eulerAngles = new Vector3(0f,180f,0f);
-        }
-        anim.SetBool("run",run);
 
-        HorizontalDir = Math.Abs(HorizontalDir);
-
-        if(wasOnAir)
-            anim.SetBool("jump",true);
-        if(IsOnFLoor)
-            anim.SetBool("jump",false);
         // Pulo
-        if (Input.GetKeyDown(KeyCode.Space)&&!wasOnAir) {
+        if (Input.GetKeyDown(KeyCode.Space)) {
             velocity.y = jumpForce;
             gravity = 0;
         }
@@ -102,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         transform.Translate(velocity * Time.fixedDeltaTime);
+
     }
 
     /// <summary>
@@ -120,18 +106,21 @@ public class PlayerMovement : MonoBehaviour
 
         isDashing = true;
         timeSinceDash = 0;
+
+        trail.emitting = true;
     }
 
     private void UpdateDash() { // chamar no fixedUpdate
         timeSinceDash += Time.fixedDeltaTime;
         velocity = dashDir * DashSpeed;
-        if(timeSinceDash >= dashDuration || isLanding) {
+
+        if(timeSinceDash >= dashDuration || IsLanding) { // end
             isDashing = false;
             isGravityEnabled = true;
             gravity = 0f;
             velocity.x = Mathf.Clamp(velocity.x, -speed, speed);
             velocity.y = Mathf.Clamp(velocity.y, -speed, speed);
-
+            trail.emitting = false;
         }
     }
 
