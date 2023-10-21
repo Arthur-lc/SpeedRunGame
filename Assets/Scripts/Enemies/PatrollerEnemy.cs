@@ -9,7 +9,7 @@ public class PatrollerEnemy : EnemyBase
     //override protected void BehaviourUpdate(float delta) {
     private void Update() {
         if(IsOnEdge() || IsOnWall()) {
-            horizontalDir = -horizontalDir;
+            Flip(-horizontalDir);
         }
 
         transform.Translate(horizontalDir * speed * Time.deltaTime, 0, 0);
