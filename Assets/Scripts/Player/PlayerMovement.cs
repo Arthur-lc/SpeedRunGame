@@ -47,10 +47,12 @@ public class PlayerMovement : MonoBehaviour
     private Collider2D coll;
 
     private Animator anim;
+    private Vector3 previousPosition, currentPosition;
 
     private void Start() {
         coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
+        previousPosition = transform.position;
     }
 
     private void Update() {
@@ -70,14 +72,18 @@ public class PlayerMovement : MonoBehaviour
 
         // Debug.Log("WasOnAir: " + wasOnAir);
         // Debug.Log("IsOnFloor: " + IsOnFLoor);
-
-        if(velocity.y < 0){
+        currentPosition = transform.position;
+        
+        if (currentPosition.y < previousPosition.y)
+        {
             anim.SetBool("jump",false);
             anim.SetBool("double_jump",false);
             anim.SetBool("fall",true);
         }
+
         if(IsOnFLoor){
             anim.SetBool("fall",false);
+            isJumping = false;
         }
 
         // Pulo
@@ -86,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
                 velocity.y = jumpForce;
                 gravity = 0;
                 doubleJump = true;
+                isJumping = true;
                 anim.SetBool("jump",true);
             }
             else{
@@ -94,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
                     gravity = 0;
                     anim.SetBool("jump",false); 
                     anim.SetBool("double_jump",true); 
+                    anim.SetBool("fall",false); 
                     doubleJump = false;     
                 }
             }
@@ -127,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         transform.Translate(velocity * Time.fixedDeltaTime);
-
+        previousPosition = currentPosition;
     }
 
     /// <summary>
