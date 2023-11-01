@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class PlayerAttackController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] private float swordAimAssistRadius = 1f;
     [SerializeField] private float swordDashDistance;
     [SerializeField] private float swordDashDuration;
+    [SerializeField] private bool swordNeedTarget = true;
 
     [Header("Gun")]
     [SerializeField] private float gunDamage;
@@ -22,6 +24,7 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] private float gunDashDistance;
     [SerializeField] private float gunDashDuration;
     [SerializeField] [Range(0,10)] private float keyboardInfluence;
+
 
     private PlayerMovement playerMovement;
     private Vector2 MouseDir => ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position).normalized;
@@ -48,10 +51,6 @@ public class PlayerAttackController : MonoBehaviour
     void SwordAtack() {
         // get Dir
         Vector2 attackDir = MouseDir;
-        /* if (playerMovement.IsOnFLoor) {
-            attackDir.y = Mathf.Max(attackDir.y, 0);
-        }
-        */
 
         // Aim Assist
         Vector2 target = GetTarget(attackDir, swordAimAssistRadius, swordDashDistance);
@@ -69,12 +68,15 @@ public class PlayerAttackController : MonoBehaviour
                 targetHealthComponent.Damage(swordDamage);
                 
                 //Dash
-                playerMovement.Dash(attackDir, swordDashDistance, swordDashDuration);
+                playerMovement.Dash(attackDir, swordDashDistance, swordDashDuration, true);
 
                 Vector3 from = transform.position;
                 Vector3 to = from + (Vector3)attackDir * swordDashDistance;
                 Debug.DrawLine(from, to, Color.green, swordDashDuration *2 );
             }
+        }
+        else if(!swordNeedTarget) {
+            playerMovement.Dash(attackDir, swordDashDistance, swordDashDuration);
         }
     }
 
