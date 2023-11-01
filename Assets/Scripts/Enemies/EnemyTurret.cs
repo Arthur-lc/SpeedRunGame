@@ -24,7 +24,6 @@ public class EnemyTurret : EnemyBase
         GameObject newProjectile = Instantiate(projectile, transform.position, transform.rotation);
 
         newProjectile.GetComponent<Projectile>().direction = GetFacingDirection();
-        Debug.Log(newProjectile.transform.right);
 
         newProjectile.SetActive(true);
     }

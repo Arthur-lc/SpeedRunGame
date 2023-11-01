@@ -49,9 +49,12 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private Vector3 previousPosition, currentPosition;
 
+    private SpriteRenderer spriteRenderer;
+
     private void Start() {
         coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         previousPosition = transform.position;
     }
 
@@ -61,14 +64,13 @@ public class PlayerMovement : MonoBehaviour
 
         bool run = Math.Abs(HorizontalDir) > 0.001;
         if(HorizontalDir > 0){
-            transform.eulerAngles = new Vector3(0f,0f,0f);
+            spriteRenderer.flipX = false;
         }
         else if(HorizontalDir < 0){
-            transform.eulerAngles = new Vector3(0f,180f,0f);
-        }
+            spriteRenderer.flipX = true;
+        } 
         anim.SetBool("run",run);
 
-        HorizontalDir = Math.Abs(HorizontalDir);
 
         // Debug.Log("WasOnAir: " + wasOnAir);
         // Debug.Log("IsOnFloor: " + IsOnFLoor);
@@ -144,9 +146,16 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="direction">direção do dash (precisar ser normalizado)</param>
     /// <param name="distance">distancia percorrida durante o dash</param>
     /// <param name="duration">tempo para percorrer a distancia do dash</param>
-    public void Dash(Vector2 direction, float distance, float duration) {
+    public void Dash(Vector2 direction, float distance, float duration, bool ignoreGround = false) {
         if (isDashing)
             return;
+        
+        if (!ignoreGround) {
+            RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, direction, distance, groundLayer);
+            if (raycastHit2D) {
+                distance = Vector2.Distance(transform.position, raycastHit2D.point);
+            }
+        }
         
         dashDir = direction;
         dashDistance = distance;
