@@ -149,15 +149,13 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="direction">direção do dash (precisar ser normalizado)</param>
     /// <param name="distance">distancia percorrida durante o dash</param>
     /// <param name="duration">tempo para percorrer a distancia do dash</param>
-    public void Dash(Vector2 direction, float distance, float duration, bool ignoreGround = false) {
+    public void Dash(Vector2 direction, float distance, float duration) {
         if (isDashing)
             return;
         
-        if (!ignoreGround) {
-            RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, direction, distance, groundLayer);
-            if (raycastHit2D) {
-                distance = Vector2.Distance(transform.position, raycastHit2D.point);
-            }
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, direction, distance, groundLayer);
+        if (raycastHit2D) {
+            distance = Vector2.Distance(transform.position, raycastHit2D.point);
         }
         
         dashDir = direction;

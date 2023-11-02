@@ -71,7 +71,7 @@ public class PlayerAttackController : MonoBehaviour
                 targetHealthComponent.Damage(swordDamage);
                 
                 //Dash
-                playerMovement.Dash(attackDir, swordDashDistance, swordDashDuration, true);
+                playerMovement.Dash(attackDir, swordDashDistance, swordDashDuration);
 
                 Vector3 from = transform.position;
                 Vector3 to = from + (Vector3)attackDir * swordDashDistance;
