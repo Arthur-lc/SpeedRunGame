@@ -24,6 +24,8 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] private float gunDashDistance;
     [SerializeField] private float gunDashDuration;
     [SerializeField] [Range(0,10)] private float keyboardInfluence;
+    [SerializeField] private SpriteRenderer gunSpriteRenderer;
+    [SerializeField] private ParticleSystem gunParticleSystem;
 
 
     private PlayerMovement playerMovement;
@@ -47,6 +49,7 @@ public class PlayerAttackController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse1)) {
             GunAtack();
+            gunSpriteRenderer.enabled = true;
             timeSinceAtacked = 0f;
         }
     }
@@ -71,7 +74,7 @@ public class PlayerAttackController : MonoBehaviour
                 targetHealthComponent.Damage(swordDamage);
                 
                 //Dash
-                playerMovement.Dash(attackDir, swordDashDistance, swordDashDuration, true);
+                playerMovement.Dash(attackDir, swordDashDistance, swordDashDuration);
 
                 Vector3 from = transform.position;
                 Vector3 to = from + (Vector3)attackDir * swordDashDistance;
@@ -85,6 +88,9 @@ public class PlayerAttackController : MonoBehaviour
 
 
     void GunAtack() {
+        StartCoroutine(ShowGun());
+        gunParticleSystem.Play();
+
         Vector2 attackDir = MouseDir;
         Vector2 dashDir = -attackDir;
         
@@ -131,5 +137,12 @@ public class PlayerAttackController : MonoBehaviour
                 Gizmos.DrawWireSphere(transform.position + (Vector3)(i * swordDashDistance * MouseDir /10), swordAimAssistRadius);
                 
             }
+    }
+
+    IEnumerator ShowGun()
+    {
+        gunSpriteRenderer.enabled = true;
+        yield return new WaitForSeconds(gunDashDuration*3);
+        gunSpriteRenderer.enabled = false;
     }
 }
