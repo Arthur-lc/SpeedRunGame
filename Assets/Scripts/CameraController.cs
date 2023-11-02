@@ -6,6 +6,8 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform leftEdge;
     [SerializeField] private Transform rightEdge;
+    [SerializeField] private Transform topEdge;
+    [SerializeField] private Transform bottomEdge;
 
     private Transform player;
     private float halfWidth;
@@ -25,6 +27,7 @@ public class CameraController : MonoBehaviour
     {
         var input = Input.GetAxis("Horizontal");
         float xPos = Mathf.Clamp(player.position.x, leftEdge.position.x + halfWidth, rightEdge.position.x - halfWidth);
-        transform.position = new Vector3(xPos, transform.position.y, transform.position.z);
+        float yPos = Mathf.Clamp(player.position.y, bottomEdge.position.y + halfHeight, topEdge.position.y - halfHeight);
+        transform.position = new Vector3(xPos, yPos, transform.position.z);
     } 
 }
