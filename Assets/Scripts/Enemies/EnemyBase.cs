@@ -10,7 +10,7 @@ public enum Direction
 
 public class EnemyBase : MonoBehaviour
 {
-    [SerializeField] protected Direction startFacingDirection;
+    [SerializeField] protected Direction startFacingDirection = Direction.left;
 
     [Header("edge/wall detection")]
     [SerializeField] private float detectionRange;
@@ -20,8 +20,10 @@ public class EnemyBase : MonoBehaviour
     protected int horizontalDir = -1;
     private Vector3 EdgeDectionPos => transform.position + new Vector3(horizontalDir * detectionRange, -GetComponent<Collider2D>().bounds.extents.y);
     private Vector3 WallDetctionPos => transform.position + new Vector3(horizontalDir * detectionRange, 0);
+    public SpriteRenderer spriteRenderer;
 
     private void Start() {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         Flip((int)startFacingDirection);
     }
 
@@ -49,10 +51,10 @@ public class EnemyBase : MonoBehaviour
     }
 
     protected void Flip(int dir) {
-        if ((horizontalDir > 0 && dir == (int)Direction.left) || (horizontalDir < 0 && dir == (int)Direction.right)) {
-            Vector3 currentScale = transform.localScale;
-            currentScale.x += -1;
-            horizontalDir = dir;
-        }
+        horizontalDir = dir;
+        if (horizontalDir == 1)
+            spriteRenderer.flipX = false;
+        else if (horizontalDir == -1)
+            spriteRenderer.flipX = true;
     }
 }
