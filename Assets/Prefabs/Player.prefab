@@ -156,9 +156,9 @@ GameObject:
   - component: {fileID: 3569579164689143235}
   - component: {fileID: 2801096991019973071}
   - component: {fileID: 2834506879451724121}
+  - component: {fileID: 7245142397244701466}
   - component: {fileID: 8244494303898893088}
   - component: {fileID: 8563874062673380773}
-  - component: {fileID: 1009297624581800652}
   - component: {fileID: 2360298174493931071}
   m_Layer: 0
   m_Name: Player
@@ -177,7 +177,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.84, y: 3.01, z: 0}
-  m_LocalScale: {x: 6.13551, y: 6.2432184, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6269747372555685269}
@@ -262,6 +262,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!70 &7245142397244701466
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6996200796204286099}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.00000007947286, y: -0.03846845}
+  m_Size: {x: 0.17204428, y: 0.2430632}
+  m_Direction: 0
 --- !u!114 &8244494303898893088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,58 +343,13 @@ MonoBehaviour:
   swordAimAssistRadius: 1
   swordDashDistance: 8
   swordDashDuration: 0.06
-  swordNeedTarget: 1
+  swordNeedTarget: 0
   gunDamage: 5
   gunRange: 5
   gunRadius: 0.9
   gunDashDistance: 4
   gunDashDuration: 0.1
   keyboardInfluence: 0.5
---- !u!61 &1009297624581800652
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6996200796204286099}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0067372173, y: -0.036415495}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.25262737, y: 0.24716894}
-  m_EdgeRadius: 0
 --- !u!95 &2360298174493931071
 Animator:
   serializedVersion: 5
