@@ -30,11 +30,11 @@ public class PlayerAttackController : MonoBehaviour
     private Vector2 MouseDir => ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position).normalized;
     private float timeSinceAtacked = 10f; // usando so pra debug
 
-    private AudioSource dashSound;
+    private AudioSource gunSound;
 
     private void Start() {
         playerMovement = GetComponent<PlayerMovement>();
-        dashSound = transform.GetChild(1).GetComponent<AudioSource>();
+        gunSound = GetComponents<AudioSource>()[2];
     }
 
     void Update() {
@@ -103,7 +103,8 @@ public class PlayerAttackController : MonoBehaviour
             playerMovement.Dash(dashDir, gunDashDistance, gunDashDuration);
         }
 
-
+        gunSound.Play();
+        
         // Debug
         Vector3 from = transform.position;
         Vector3 to = from + (Vector3)attackDir * gunRange;

@@ -53,13 +53,15 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private AudioSource jumpSound;
+    private AudioSource dashSound;
 
     private void Start() {
         coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         previousPosition = transform.position;
-        jumpSound = GetComponent<AudioSource>();
+        jumpSound = GetComponents<AudioSource>()[0];
+        dashSound = GetComponents<AudioSource>()[1];
     }
 
     private void Update() {
@@ -84,7 +86,9 @@ public class PlayerMovement : MonoBehaviour
 
         if(IsOnFLoor){
             anim.SetBool("fall",false);
+            anim.SetBool("double_jump",false);
             isJumping = false;
+            doubleJump = false;
         }
 
         // Pulo
@@ -95,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
                 doubleJump = true;
                 isJumping = true;
                 anim.SetBool("jump",true);
+                anim.SetBool("double_jump",false);
                 jumpSound.Play();
             }
             else{
@@ -173,8 +178,8 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateDash() { // chamar no fixedUpdate
         timeSinceDash += Time.fixedDeltaTime;
         velocity = dashDir * DashSpeed;
-
         if(timeSinceDash >= dashDuration || IsLanding) { // end
+            dashSound.Play();
             isDashing = false;
             isGravityEnabled = true;
             gravity = 0f;
