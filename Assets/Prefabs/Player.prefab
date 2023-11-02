@@ -73,7 +73,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Time: 0.5
   m_PreviewTimeScale: 1
   m_Parameters:
@@ -223,7 +223,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -6367560908665664636, guid: cd947491a13509945aa1b644f9db3ef2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -276,6 +276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpForce: 20
+  maxFalingSpeed: 30
   airControl: 0.1
   Gravity: 8.9
   trail: {fileID: 8354764159696864487}
@@ -307,10 +308,11 @@ MonoBehaviour:
   swordAimAssistRadius: 1
   swordDashDistance: 8
   swordDashDuration: 0.06
+  swordNeedTarget: 1
   gunDamage: 5
   gunRange: 5
   gunRadius: 0.9
-  gunDashDistance: 3
+  gunDashDistance: 4
   gunDashDuration: 0.1
   keyboardInfluence: 0.5
 --- !u!61 &1009297624581800652
