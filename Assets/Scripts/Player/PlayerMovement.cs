@@ -51,11 +51,14 @@ public class PlayerMovement : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    private AudioSource jumpSound;
+
     private void Start() {
         coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         previousPosition = transform.position;
+        jumpSound = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -96,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
                 doubleJump = true;
                 isJumping = true;
                 anim.SetBool("jump",true);
+                jumpSound.Play();
             }
             else{
                 if(doubleJump){
@@ -104,7 +108,8 @@ public class PlayerMovement : MonoBehaviour
                     anim.SetBool("jump",false); 
                     anim.SetBool("double_jump",true); 
                     anim.SetBool("fall",false); 
-                    doubleJump = false;     
+                    doubleJump = false;   
+                    jumpSound.Play();  
                 }
             }
         }

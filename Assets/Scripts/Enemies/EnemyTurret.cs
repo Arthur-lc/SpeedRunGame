@@ -10,6 +10,12 @@ public class EnemyTurret : EnemyBase
 
     private float timeSinceFire = 0f;
 
+    private AudioSource shootSound;
+
+    private void Start() {
+        shootSound = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         if (timeSinceFire > fireCooldown) {
@@ -26,5 +32,6 @@ public class EnemyTurret : EnemyBase
         newProjectile.GetComponent<Projectile>().direction = GetFacingDirection();
 
         newProjectile.SetActive(true);
+        shootSound.Play();
     }
 }
