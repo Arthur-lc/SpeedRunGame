@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float maxFalingSpeed = 10f;
     [SerializeField] [Range(0f, 1f)] private float airControl = 0.1f;
     [SerializeField] private float Gravity = 10f;
 
@@ -47,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     private Collider2D coll;
 
     private Animator anim;
-    private Vector3 previousPosition, currentPosition;
+    private Vector3 previousPosition;
 
     private SpriteRenderer spriteRenderer;
 
@@ -70,13 +71,8 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX = true;
         } 
         anim.SetBool("run",run);
-
-
-        // Debug.Log("WasOnAir: " + wasOnAir);
-        // Debug.Log("IsOnFloor: " + IsOnFLoor);
-        currentPosition = transform.position;
         
-        if (currentPosition.y < previousPosition.y)
+        if (transform.position.y < previousPosition.y)
         {
             anim.SetBool("jump",false);
             anim.SetBool("double_jump",false);
@@ -132,12 +128,14 @@ public class PlayerMovement : MonoBehaviour
                 if (isGravityEnabled) {
                     gravity += Gravity * Time.fixedDeltaTime;
                     velocity.y -= gravity;
+                    if (velocity.y < -maxFalingSpeed)
+                        velocity.y = -maxFalingSpeed;
                 }
             }   
         }
         
         transform.Translate(velocity * Time.fixedDeltaTime);
-        previousPosition = currentPosition;
+        previousPosition = transform.position;
     }
 
     /// <summary>
