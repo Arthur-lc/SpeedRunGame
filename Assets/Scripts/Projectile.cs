@@ -24,13 +24,12 @@ public class Projectile : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if (other.collider.includeLayers == ignoreLayer)
-            return;
+        // if (other.collider.includeLayers == ignoreLayer)
+        //     return;
 
-        if(other.collider.CompareTag("Player")) {
-            Debug.Log("Bateu");
-        }
-        
+        // if(other.collider.CompareTag("Player")) {
+        // }
         Destroy(gameObject);
     }
+
 }

@@ -213,4 +213,16 @@ public class PlayerMovement : MonoBehaviour
         to = from + Vector3.up * collisionSkinWidth;
         Gizmos.DrawLine(from, to);
     }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+
+        if(other.collider.CompareTag("projetil")) {
+            anim.SetBool("hit",true);
+            StartCoroutine(pauseHit());
+        }
+    }
+    private IEnumerator pauseHit() {
+        yield return new WaitForSeconds(0.4f);
+        anim.SetBool("hit",false);
+    }
 }
