@@ -220,6 +220,11 @@ public class PlayerMovement : MonoBehaviour
 
         if(other.collider.CompareTag("projetil")) {
             anim.SetBool("hit",true);
+            playerLife.Dano(6);
+            StartCoroutine(pauseHit());
+        }
+        if(other.collider.CompareTag("Enemy")) {
+            anim.SetBool("hit",true);
             playerLife.Dano(5);
             StartCoroutine(pauseHit());
         }

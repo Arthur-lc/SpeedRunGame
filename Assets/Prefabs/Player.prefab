@@ -349,7 +349,7 @@ MonoBehaviour:
   swordAimAssistRadius: 1
   swordDashDistance: 8
   swordDashDuration: 0.06
-  swordNeedTarget: 0
+  swordNeedTarget: 1
   gunDamage: 5
   gunRange: 5
   gunRadius: 0.9
