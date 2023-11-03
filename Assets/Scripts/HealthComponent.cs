@@ -22,4 +22,5 @@ public class HealthComponent : MonoBehaviour
     private void Die() {
         Destroy(gameObject);
     }
+    
 }

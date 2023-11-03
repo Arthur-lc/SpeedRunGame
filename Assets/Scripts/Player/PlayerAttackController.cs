@@ -29,6 +29,7 @@ public class PlayerAttackController : MonoBehaviour
 
 
     private PlayerMovement playerMovement;
+    
     private Vector2 MouseDir => ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position).normalized;
     private float timeSinceAtacked = 10f; // usando so pra debug
 

@@ -54,11 +54,13 @@ public class PlayerMovement : MonoBehaviour
 
     private AudioSource jumpSound;
     private AudioSource dashSound;
+    private PlayerLife playerLife;
 
     private void Start() {
         coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerLife = GetComponent<PlayerLife>();
         previousPosition = transform.position;
         jumpSound = GetComponents<AudioSource>()[0];
         dashSound = GetComponents<AudioSource>()[1];
@@ -218,6 +220,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(other.collider.CompareTag("projetil")) {
             anim.SetBool("hit",true);
+            playerLife.Dano(5);
             StartCoroutine(pauseHit());
         }
     }
