@@ -27,7 +27,8 @@ public class EnemyTurret : EnemyBase
 
     void Fire() {
         timeSinceFire = 0f;
-        GameObject newProjectile = Instantiate(projectile, transform.position, transform.rotation);
+        Vector3 newpos = new Vector3(1.3f,0,0);
+        GameObject newProjectile = Instantiate(projectile, transform.position-newpos, transform.rotation);
 
         newProjectile.GetComponent<Projectile>().direction = GetFacingDirection();
 

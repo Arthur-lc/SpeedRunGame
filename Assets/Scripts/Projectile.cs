@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
         if (other.collider.includeLayers == ignoreLayer)
             return;
 
-        if(other.collider.includeLayers == targetLayer) {
+        if(other.collider.CompareTag("Player")) {
             Debug.Log("Bateu");
         }
         

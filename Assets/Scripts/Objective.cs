@@ -17,7 +17,6 @@ public class Objective : MonoBehaviour
         if (hasStarted && !winSound.isPlaying)
         {
             string audioClipName = winSound.clip.name;
-            Debug.Log("Nome do áudio: " + audioClipName);
             int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
             SceneManager.LoadScene(nextSceneIndex);
         }
@@ -26,11 +25,6 @@ public class Objective : MonoBehaviour
         if (other.CompareTag("Player")) {
             winSound.Play();
             hasStarted = true;
-
-            // if(!winSound.isPlaying){
-                // int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-                // SceneManager.LoadScene(nextSceneIndex);
-            // }
         }
     }
 }
