@@ -5,17 +5,8 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    // Componente de vida em cima do personagem, com uma função que altera a vida do personagem de acordo com a vida atual
     [SerializeField] private Image barraImage;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void AlterarBarra(int VidaAtual, int vidaMaxima){
         barraImage.fillAmount = (float) VidaAtual/vidaMaxima;
     }

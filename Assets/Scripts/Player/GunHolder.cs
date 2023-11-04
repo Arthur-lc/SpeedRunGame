@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GunHolder : MonoBehaviour
 {
+    // função para adicionar o sprite da arma ao atirar
     [SerializeField] private SpriteRenderer gunSpriteRenderer;
 
     void Update()

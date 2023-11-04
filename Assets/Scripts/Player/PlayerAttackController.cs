@@ -6,6 +6,7 @@ using UnityEngine.PlayerLoop;
 
 public class PlayerAttackController : MonoBehaviour
 {
+    // Ataque do personagem, onde ele pode usar uma espada e uma arma, ambas dão um dash, a espada para frente e a arma para trás
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private LayerMask enemyAndGroundLayer;
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PatrollerEnemy : EnemyBase
 {
+    // Inimigo que anda na horizontal
     [SerializeField] private float speed;
 
     //override protected void BehaviourUpdate(float delta) {

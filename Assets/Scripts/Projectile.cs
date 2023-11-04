@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private LayerMask targetLayer;
-    [SerializeField] private LayerMask ignoreLayer;
+    // Aqui temos o projetil, ele tem uma duração e uma colisão que o destrói
     [SerializeField] private float speed;
     [SerializeField] private float duration = 4f;
-    //[SerializeField] private float damage = 1f;
 
     [NonSerialized] public Vector2 direction;
 
@@ -24,11 +22,6 @@ public class Projectile : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        // if (other.collider.includeLayers == ignoreLayer)
-        //     return;
-
-        // if(other.collider.CompareTag("Player")) {
-        // }
         Destroy(gameObject);
     }
 

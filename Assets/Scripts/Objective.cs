@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Objective : MonoBehaviour
 {
+    // Temos o objetivo, que quando o player chegar nele, ele toca um som de fase concluida
     private AudioSource winSound;
     private bool hasStarted;
 
