@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyTurret : EnemyBase
 {
-    // Inimigo que atira, fica parado somente atirando
     [SerializeField] private float fireCooldown = 5f;
     [SerializeField] private GameObject projectile;
     [SerializeField] private LayerMask playerLayer;

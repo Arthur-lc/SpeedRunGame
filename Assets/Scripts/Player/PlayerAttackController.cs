@@ -88,6 +88,7 @@ public class PlayerAttackController : MonoBehaviour
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     void GunAtack() {
         StartCoroutine(ShowGun());

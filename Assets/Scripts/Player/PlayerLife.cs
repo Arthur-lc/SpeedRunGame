@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
-    // Vida do personagem, onde tem a função de dano, que tira vida do personagem e a die que faz uma animação do personagem morrendo
     private int VidaAtual;
     private int vidaTotal = 10;
     private Animator anim;

@@ -158,6 +158,7 @@ public class PlayerMovement : MonoBehaviour
         previousPosition = transform.position;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
     /// Executa o dash caso outro dash não estaja em execução
     /// </summary>
@@ -210,7 +211,6 @@ public class PlayerMovement : MonoBehaviour
         collisionDown = Physics2D.Raycast(lowerCollisionBound, Vector2.down, collisionSkinWidth, groundLayer);
     }
 
-    // Desenhando os Gizmos
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -224,7 +224,8 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawLine(from, to);
     }
 
-    //Fazendo as colisões e dando o dano no personagem
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
     private void OnCollisionEnter2D(Collision2D other) {
 
         if(other.collider.CompareTag("projetil")) {
