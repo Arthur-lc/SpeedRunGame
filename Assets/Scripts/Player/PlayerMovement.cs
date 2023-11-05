@@ -9,6 +9,7 @@ using UnityEngine.Rendering.Universal;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // Movimentação 
     public float HorizontalDir { get; private set;}
     private Vector2 velocity = Vector2.zero;
 
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] [Range(0f, 1f)] private float airControl = 0.1f;
     [SerializeField] private float Gravity = 10f;
 
+    // Dash
     [Header("Dash")]
     [SerializeField] private TrailRenderer trail;
     private float dashDistance;
@@ -29,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private float DashSpeed => dashDistance / dashDuration;
 
 
+    //Checks
     [Header("Checks")]
     [SerializeField] private LayerMask groundLayer;
     private bool collisionUp, collisionDown;
@@ -47,15 +50,17 @@ public class PlayerMovement : MonoBehaviour
     private bool isGravityEnabled = true;
     private Collider2D coll;
 
+    // Animação
     private Animator anim;
     private Vector3 previousPosition;
-
     private SpriteRenderer spriteRenderer;
 
+    // Sound
     private AudioSource jumpSound;
     private AudioSource dashSound;
     private PlayerLife playerLife;
 
+    // Função Start pegando os componentes necessários
     private void Start() {
         coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
@@ -67,10 +72,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Update() {
+        //movimentação
         HorizontalDir = 0;
         HorizontalDir = Input.GetAxisRaw("Horizontal");
 
         bool run = Math.Abs(HorizontalDir) > 0.001;
+        //flip do player
         if(HorizontalDir > 0){
             spriteRenderer.flipX = false;
         }
@@ -79,13 +86,14 @@ public class PlayerMovement : MonoBehaviour
         } 
         anim.SetBool("run",run);
         
+        //setando a animação de fall quando está caindo
         if (transform.position.y < previousPosition.y)
         {
             anim.SetBool("jump",false);
             anim.SetBool("double_jump",false);
             anim.SetBool("fall",true);
         }
-
+        //setando as animções como false quando está no chão
         if(IsOnFLoor){
             anim.SetBool("fall",false);
             anim.SetBool("double_jump",false);
@@ -150,6 +158,7 @@ public class PlayerMovement : MonoBehaviour
         previousPosition = transform.position;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
     /// Executa o dash caso outro dash não estaja em execução
     /// </summary>
@@ -202,7 +211,6 @@ public class PlayerMovement : MonoBehaviour
         collisionDown = Physics2D.Raycast(lowerCollisionBound, Vector2.down, collisionSkinWidth, groundLayer);
     }
 
-
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -215,6 +223,8 @@ public class PlayerMovement : MonoBehaviour
         to = from + Vector3.up * collisionSkinWidth;
         Gizmos.DrawLine(from, to);
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void OnCollisionEnter2D(Collision2D other) {
 

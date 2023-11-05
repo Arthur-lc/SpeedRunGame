@@ -17,7 +17,6 @@ public class PlayerLife : MonoBehaviour
         barra.AlterarBarra(VidaAtual,vidaTotal);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(VidaAtual <= 0){

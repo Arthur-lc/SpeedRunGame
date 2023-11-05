@@ -9,6 +9,7 @@ public enum CameraType {
 
 public class CameraController : MonoBehaviour
 {
+    // Aqui fazemos o controle da camera, sendo ela follow ou smoothFollow, tendo os limites laterais, superiores e inferiores
     [SerializeField] private CameraType cameraType = CameraType.SmoothFollow;
     [SerializeField] private float height = 0f;
     [SerializeField] private float speed = 5f;
@@ -22,7 +23,6 @@ public class CameraController : MonoBehaviour
     private float halfWidth;
     private float halfHeight;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Transform>();
